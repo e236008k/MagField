@@ -56,9 +56,9 @@ def calc_mag_moment(x, y, z, theta, phi, xmesh, ymesh, grid_len, nav_hard_info )
 
     return ret_mag_field
 
-def calc_matrix_power_of_n(mat, n):
+def calc_matrix_power(mat):
     ans = mat
-    for i in range(n - 1):
+    for i in range(1):
         ans = np.multiply(ans, mat)
 
     # 計算結果を戻り値に格納
@@ -68,14 +68,20 @@ def calc_matrix_power_of_n(mat, n):
 
 def calc_dist_matrix(xmat, ymat, zmat, n):
 
-    x_power_2 = calc_matrix_power_of_n(xmat, 2)
-    y_power_2 = calc_matrix_power_of_n(ymat, 2)
-    z_power_2 = calc_matrix_power_of_n(zmat, 2)
+    #距離(r^2)の計算
+    x_power_2 = calc_matrix_power(xmat)
+    y_power_2 = calc_matrix_power(ymat)
+    z_power_2 = calc_matrix_power(zmat)
+    r_power = x_power_2 + y_power_2 + z_power_2
 
-    r_power_2 = x_power_2 + y_power_2 + z_power_2
-    r_power_3 = r_power_2 * np.sqrt(r_power_2)
-    ret = r_power_3
+    #距離rの計算
+    r = np.sqrt(r_power)
+    ans = r
 
+    for i in range(n-1):
+        ans = ans * r
+
+    ret = ans
     return ret
 
 if __name__ == '__main__':
