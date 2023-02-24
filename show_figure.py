@@ -36,7 +36,7 @@ class Show_Figure:
     def _graph_setting_init(self):
         self.ax.set_xlabel("X Axis")
         self.ax.set_ylabel("Y Axis")
-        self.ax.set_zlabel("Z Axis")
+        self.ax.set_zlabel("Mag Moment")
 
     def get_fig_obj(self):
 
